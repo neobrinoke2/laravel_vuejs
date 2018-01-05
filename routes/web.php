@@ -11,6 +11,6 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route for VueJS
+Route::get('/', 'PagesController@show');
+Route::get('/users', 'PagesController@show');

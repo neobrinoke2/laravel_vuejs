@@ -7,8 +7,8 @@
 		<title>Laravel</title>
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.13/semantic.min.css">
 		<style>
-			.main {
-				margin-top: 50px;
+			.ui.inverted.menu {
+				border-radius: 0px;
 			}
 			.router-link-active {
 				background-color: #EEE;
@@ -17,20 +17,21 @@
 	</head>
 	<body>
 		<div id="app">
-			<div class="ui fixed inverted menu">
+			<header class="ui inverted menu">
 				<div class="ui container">
 					<router-link :to="{name: 'root'}" class="header item">Accueil</router-link>
-					<router-link :to="{name: 'a'}" class="item">A</router-link>
-					<router-link :to="{name: 'b'}" class="item">B</router-link>
-					<router-link :to="{name: 'c'}" class="item">C</router-link>
+					<router-link :to="{name: 'user.index'}" class="item">Liste des utilisateurs</router-link>
 				</div>
-			</div>
-			<div class="main">
-				<div class="ui container">
-					<router-view></router-view>
+			</header>
+			<main class="ui container">
+				<router-view></router-view>
+				<div class="ui dimmer" :class="{active: loading}">
+					<div class="ui loader"></div>
 				</div>
-			</div>
+			</main>
 		</div>
+		<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.13/semantic.min.js"></script>
 		<script src="{{ asset('js/app.js') }}"></script>
 	</body>
 </html>

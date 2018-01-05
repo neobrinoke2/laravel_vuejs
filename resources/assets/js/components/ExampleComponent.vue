@@ -1,9 +1,0 @@
-<template>
-	<div>Exemple component</div>
-</template>
-
-<script>
-	export default {
-
-	}
-</script>

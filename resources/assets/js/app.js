@@ -1,37 +1,41 @@
 import Vue from 'vue'
-import VueResource from 'vue-resource'
 import VueRouter from 'vue-router'
+import VueResource from 'vue-resource'
 
-Vue.use(VueResource)
 Vue.use(VueRouter)
+Vue.use(VueResource)
 
 const router = new VueRouter({
     mode: 'history',
     routes: [{
         path: '/',
-        component: require('./components/ExampleComponent.vue'),
+        component: resolve => require(['./components/index.vue'], resolve),
         name: 'root'
     }, {
-        path: '/a',
-        component: require('./components/PageA.vue'),
-        name: 'a'
-    }, {
-        path: '/b',
-        component: require('./components/PageB.vue'),
-        name: 'b'
-    }, {
-        path: '/c',
-        component: require('./components/PageC.vue'),
-        name: 'c'
+        path: '/users',
+        component: resolve => require(['./components/User/index.vue'], resolve),
+        name: 'user.index'
     }, {
         path: '*',
         redirect: '/'
     }]
 })
 
-Vue.component('test', require('./components/ExampleComponent.vue'))
+Vue.http.options.root = 'http://localhost:8000/api'
+Vue.http.interceptors.push((request, next) => {
+    next((response) => {
+        if (request.after) {
+            request.after.call(this, response)
+        }
+    })
+})
 
 const app = new Vue({
     el: '#app',
-    router: router
+    router: router,
+    data () {
+        return {
+            loading: false
+        }
+    }
 })
