@@ -1,9 +1,9 @@
 <template>
-	<div>Exemple component</div>
+	<div>Page B</div>
 </template>
 
 <script>
 	export default {
-
+		
 	}
 </script>
